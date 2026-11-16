@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfólio Retro 98</title>
     <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
     <!-- Google Fonts pixelated retro fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=VT323&family=MS+Sans+Serif&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Tahoma', 'MS Sans Serif', sans-serif;
+            font-family: 'Tahoma', 'MS Sans Serif', 'Arial', sans-serif;
             user-select: none;
             overflow: hidden;
             height: 100vh;
             width: 100vw;
             background-color: #000;
+        }
+
+        * {
+            font-family: 'Tahoma', 'MS Sans Serif', 'Arial', sans-serif;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Tahoma', 'MS Sans Serif', 'Arial', sans-serif;
+        }
+
+        button, input, select, textarea {
+            font-family: 'Tahoma', 'MS Sans Serif', 'Arial', sans-serif;
         }
 
         /* Pixel Title font */
@@ -63,6 +75,25 @@
             border-bottom: 2px solid #ffffff;
         }
 
+        /* Botão de fechar em vermelho para chamar atenção */
+        .close-page-button {
+            background: #d00000;
+            color: #ffffff;
+            border-top: 2px solid #ff7777;
+            border-left: 2px solid #ff7777;
+            border-right: 2px solid #650000;
+            border-bottom: 2px solid #650000;
+        }
+        .close-page-button:hover {
+            background: #a80000;
+        }
+        .close-page-button:active {
+            border-top: 2px solid #650000;
+            border-left: 2px solid #650000;
+            border-right: 2px solid #ff7777;
+            border-bottom: 2px solid #ff7777;
+        }
+
         /* Desktop icon hover */
         .retro-icon-btn {
             transition: transform 0.15s ease-in-out;
@@ -70,10 +101,10 @@
         .retro-icon-btn:hover {
             transform: translateY(-4px) scale(1.05);
         }
-        .retro-icon-btn:hover .icon-label {
-            background-color: #000080;
-            color: #ffffff;
-            outline: 1px dotted #ffffff;
+        .icon-label { text-shadow: 1px 1px 0 #000, 0 2px 8px rgba(0,0,0,0.9); }
+        .script-title {
+            font-family: 'Pinyon Script', cursive;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.45);
         }
 
         /* CRT Overlay Effect for Video Page */
@@ -104,6 +135,11 @@
             border-bottom: 2px solid #404040;
         }
 
+        /* Mobile: scrollbar menor */
+        @media (max-width: 640px) {
+            ::-webkit-scrollbar { width: 6px; height: 6px; }
+        }
+
         /* Page view transitions */
         .page-view {
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
@@ -114,350 +150,489 @@
             transform: scale(0.98);
             display: none !important;
         }
+    
+        .pixel-img { image-rendering: pixelated; }
     </style>
 </head>
 <body class="relative w-screen h-screen m-0 p-0 overflow-hidden flex flex-col justify-between">
 
     <!-- ================================================================= -->
-    <!-- MAIN HOME PAGE (EXACT SURREALIST MOUNTAIN & HOUSE IMAGE BACKGROUND) -->
+    <!-- MAIN HOME PAGE (FUNDO: fundo.jpg — paisagem surrealista)          -->
     <!-- ================================================================= -->
-    <section id="page-home" class="page-view absolute inset-0 z-10 flex flex-col justify-between p-4 md:p-8 pb-14">
-        
-        <!-- EXACT SURREALIST LANDSCAPE BACKGROUND IMAGE -->
+    <section id="page-home" class="page-view absolute inset-0 z-10 flex flex-row">
+
+        <!-- BACKGROUND IMAGE -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=80" 
-                 alt="Surrealist Mountain House Background" 
-                 class="w-full h-full object-cover object-center select-none" />
-            <div class="absolute inset-0 bg-[#0f52ba]/10 mix-blend-overlay"></div>
+            <img src="fundo.jpg"
+                 alt="Paisagem surrealista"
+                 class="w-full h-full object-cover object-center select-none"
+                 draggable="false" />
         </div>
 
-        <!-- MAIN TITLE: PORTFÓLIO (SEM TEXTO ADICIONAL) -->
-        <div class="relative z-10 mt-8 md:mt-12 text-center">
-            <h1 class="pixel-title text-6xl md:text-9xl font-black text-white tracking-widest uppercase drop-shadow-[0_6px_10px_rgba(0,0,0,0.9)]">
-                PORTFÓLIO
-            </h1>
-        </div>
-
-        <!-- 3 RETRO APPS/ICONS -->
-        <div class="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-8 md:gap-16 max-w-4xl w-full mx-auto my-auto px-4">
-            
-            <!-- Icon 1: Edição de Vídeo -->
-            <div onclick="navigateTo('video')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
-                <div class="w-20 h-20 md:w-24 md:h-24 p-2 flex items-center justify-center drop-shadow-[0_10px_10px_rgba(0,0,0,0.7)]">
-                    <svg viewBox="0 0 48 48" class="w-full h-full">
-                        <rect x="6" y="14" width="24" height="20" fill="#a0a0a0" stroke="#000" stroke-width="2"/>
-                        <rect x="8" y="16" width="20" height="16" fill="#c0c0c0"/>
-                        <circle cx="18" cy="24" r="5" fill="#333" stroke="#000" stroke-width="1.5"/>
-                        <circle cx="18" cy="24" r="2" fill="#00d2ff"/>
-                        <circle cx="12" cy="11" r="5" fill="#808080" stroke="#000" stroke-width="1.5"/>
-                        <circle cx="24" cy="11" r="5" fill="#808080" stroke="#000" stroke-width="1.5"/>
-                        <circle cx="12" cy="11" r="2" fill="#fff"/>
-                        <circle cx="24" cy="11" r="2" fill="#fff"/>
-                        <polygon points="30,18 42,12 42,36 30,30" fill="#606060" stroke="#000" stroke-width="2"/>
-                        <polygon points="42,12 45,10 45,38 42,36" fill="#303030" stroke="#000" stroke-width="1.5"/>
-                    </svg>
-                </div>
-                <span class="icon-label mt-2 text-white font-bold text-xs md:text-sm bg-[#000080]/90 px-3 py-1 border border-white/50 shadow text-center tracking-wide">
-                    Edição de Vídeo
-                </span>
-            </div>
-
-            <!-- Icon 2: Edição de Imagem -->
-            <div onclick="navigateTo('image')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
-                <div class="w-20 h-20 md:w-24 md:h-24 p-2 flex items-center justify-center drop-shadow-[0_10px_10px_rgba(0,0,0,0.7)]">
-                    <svg viewBox="0 0 48 48" class="w-full h-full">
-                        <path d="M 24 6 C 12 6 4 14 4 25 C 4 34 12 42 22 42 C 26 42 28 38 28 35 C 28 33 27 32 27 30 C 27 28 29 27 31 27 L 36 27 C 41 27 44 23 44 18 C 44 10 35 6 24 6 Z" fill="#e6a15c" stroke="#000" stroke-width="2"/>
-                        <circle cx="14" cy="18" r="3.5" fill="#e53935" stroke="#000" stroke-width="1"/>
-                        <circle cx="24" cy="13" r="3.5" fill="#fdd835" stroke="#000" stroke-width="1"/>
-                        <circle cx="34" cy="17" r="3.5" fill="#1e88e5" stroke="#000" stroke-width="1"/>
-                        <circle cx="13" cy="28" r="3.5" fill="#43a047" stroke="#000" stroke-width="1"/>
-                        <path d="M 32 40 L 42 26 L 45 29 L 35 43 Z" fill="#8d6e63" stroke="#000" stroke-width="1.5"/>
-                        <path d="M 30 42 L 33 38 L 36 41 L 32 45 Z" fill="#333"/>
-                    </svg>
-                </div>
-                <span class="icon-label mt-2 text-white font-bold text-xs md:text-sm bg-[#000080]/90 px-3 py-1 border border-white/50 shadow text-center tracking-wide">
-                    Edição de Imagem
-                </span>
-            </div>
-
-            <!-- Icon 3: Design / Projetos -->
+        <!-- ÍCONES: coluna esquerda -->
+        <div class="relative z-10 flex flex-col items-center justify-start gap-6 pt-8 pl-6 pr-3 flex-shrink-0" style="width:150px;">
             <div onclick="navigateTo('design')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
-                <div class="w-20 h-20 md:w-24 md:h-24 p-2 flex items-center justify-center drop-shadow-[0_10px_10px_rgba(0,0,0,0.7)]">
-                    <svg viewBox="0 0 48 48" class="w-full h-full">
-                        <rect x="8" y="6" width="32" height="36" fill="#1565c0" stroke="#000" stroke-width="2"/>
-                        <line x1="8" y1="18" x2="40" y2="18" stroke="#64b5f6" stroke-width="1" stroke-dasharray="2,2"/>
-                        <line x1="8" y1="30" x2="40" y2="30" stroke="#64b5f6" stroke-width="1" stroke-dasharray="2,2"/>
-                        <line x1="24" y1="6" x2="24" y2="42" stroke="#64b5f6" stroke-width="1" stroke-dasharray="2,2"/>
-                        <polygon points="16,14 32,14 36,34 12,34" fill="none" stroke="#fff" stroke-width="2"/>
-                        <rect x="14" y="12" width="4" height="4" fill="#ffeb3b" stroke="#000"/>
-                        <rect x="30" y="12" width="4" height="4" fill="#ffeb3b" stroke="#000"/>
-                        <rect x="34" y="32" width="4" height="4" fill="#ffeb3b" stroke="#000"/>
-                        <rect x="10" y="32" width="4" height="4" fill="#ffeb3b" stroke="#000"/>
-                        <polygon points="28,20 42,6 45,9 31,23" fill="#ffb300" stroke="#000" stroke-width="1"/>
+                <div class="w-24 h-24 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
+                    <img src="icons/icon-design.png" alt="Design" class="w-full h-full pixel-img" draggable="false" />
+                </div>
+                <span class="icon-label mt-1 text-white font-bold text-[10px] text-center leading-tight">Design</span>
+            </div>
+            <div onclick="navigateTo('video')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                <div class="w-24 h-24 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
+                    <img src="icons/icon-video.png" alt="Vídeos" class="w-full h-full pixel-img" draggable="false" />
+                </div>
+                <span class="icon-label mt-1 text-white font-bold text-[10px] text-center leading-tight">Vídeos</span>
+            </div>
+            <div onclick="navigateTo('uiux')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                <div class="w-24 h-24 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
+                    <img src="icons/icon-uiux.png" alt="UI/UX" class="w-full h-full pixel-img" draggable="false" />
+                </div>
+                <span class="icon-label mt-1 text-white font-bold text-[10px] text-center leading-tight">UI/UX</span>
+            </div>
+            <div onclick="navigateTo('fotografia')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                <div class="w-24 h-24 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
+                    <img src="icons/icon-fotografia.png" alt="Fotografia" class="w-full h-full pixel-img" draggable="false" />
+                </div>
+                <span class="icon-label mt-1 text-white font-bold text-[10px] text-center leading-tight">Fotografia</span>
+            </div>
+        </div>
+
+        <!-- JANELA WIN98 GRANDE -->
+        <div class="relative z-10 flex-1 flex items-center justify-center p-3 sm:p-5">
+            <div class="win98-box flex flex-col w-full h-full" style="max-width: 860px; max-height: 92vh;">
+
+                <!-- Titlebar -->
+                <div class="bg-[#000080] h-7 px-2 flex items-center justify-between flex-shrink-0">
+                    <div class="flex items-center gap-1.5">
+                        <img src="icons/icon-design.png" class="w-4 h-4 pixel-img" alt="" />
+                        <span class="text-white text-xs font-bold">Portfólio</span>
+                    </div>
+                    <div class="flex gap-1">
+                        <button class="win98-button w-5 h-4 text-[9px] leading-none">_</button>
+                        <button class="win98-button w-5 h-4 text-[9px] leading-none">□</button>
+                        <button class="win98-button close-page-button w-5 h-4 text-[9px] leading-none">✕</button>
+                    </div>
+                </div>
+
+                <!-- Conteúdo rolável -->
+                <div class="flex-1 overflow-y-auto bg-white">
+
+                    <!-- Body -->
+                    <div class="p-4 sm:p-6 flex flex-col gap-5">
+
+                        <!-- Nome e bio -->
+                        <div class="flex gap-4 items-start">
+                            <div class="win98-inset w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0 bg-gray-200 overflow-hidden">
+                                <img src="imagens/foto-perfil-pedro.jpg" alt="Pedro Delvaux" class="w-full h-full object-cover" draggable="false" />
+                            </div>
+                            <div>
+                                <h1 class="text-xl sm:text-2xl font-bold text-black leading-tight">Pedro Delvaux</h1>
+                                <p class="text-xs sm:text-sm text-gray-700 mt-2 leading-relaxed max-w-md">
+                                    Publicitário e UI/UX Designer.
+                                </p>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-300" />
+
+                        <!-- Disponível / Sociais -->
+                        <div class="flex flex-wrap gap-8 text-xs text-gray-700">
+                            <div>
+                                <p class="font-bold text-black mb-1">Email</p>
+                                <a href="mailto:Pedrodelvauxdasilva@gmail.com" class="text-[#0000cc] underline">Pedrodelvauxdasilva@gmail.com</a>
+                            </div>
+                            <div>
+                                <p class="font-bold text-black mb-1">Sociais</p>
+                                <a href="https://www.linkedin.com/in/pedro-delvaux-a5454517b/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#0000cc] underline">
+                                    <svg aria-hidden="true" viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0Z"/></svg>
+                                    PedroDelvaux/in
+                                </a>
+                                <a href="https://www.instagram.com/pedrodelvaux/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-1.5 text-[#0000cc] underline">
+                                    <svg aria-hidden="true" viewBox="0 0 24 24" class="w-3.5 h-3.5 fill-current"><path d="M7.8 2h8.4A5.8 5.8 0 0 1 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8A5.8 5.8 0 0 1 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2Zm0 2A3.8 3.8 0 0 0 4 7.8v8.4A3.8 3.8 0 0 0 7.8 20h8.4a3.8 3.8 0 0 0 3.8-3.8V7.8A3.8 3.8 0 0 0 16.2 4H7.8Zm4.2 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.25-3.5a1.25 1.25 0 1 1 0 2.5 1.25 1.25 0 0 1 0-2.5Z"/></svg>
+                                    @Pedrodelvaux
+                                </a>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-300" />
+
+                        <!-- My Work -->
+                        <div>
+                            <h2 class="text-base sm:text-lg font-bold text-black mb-3">My Work</h2>
+                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                <button type="button" onclick="navigateTo('design')" aria-label="Abrir Design" class="win98-inset aspect-video overflow-hidden cursor-pointer retro-icon-btn">
+                                    <img src="imagens/design.jpg" alt="Design" class="w-full h-full object-cover" draggable="false" />
+                                </button>
+                                <button type="button" onclick="navigateTo('video')" aria-label="Abrir Vídeos" class="win98-inset aspect-video overflow-hidden cursor-pointer retro-icon-btn">
+                                    <img src="imagens/video.jpg" alt="Vídeos" class="w-full h-full object-cover" draggable="false" />
+                                </button>
+                                <button type="button" onclick="navigateTo('uiux')" aria-label="Abrir UI/UX" class="win98-inset aspect-video overflow-hidden cursor-pointer retro-icon-btn">
+                                    <img src="imagens/uiux.jpg" alt="UI/UX" class="w-full h-full object-cover" draggable="false" />
+                                </button>
+                                <button type="button" onclick="navigateTo('fotografia')" aria-label="Abrir Fotografia" class="win98-inset aspect-video overflow-hidden cursor-pointer retro-icon-btn">
+                                    <img src="imagens/fotografia-01.jpg" alt="Fotografia" class="w-full h-full object-cover" draggable="false" />
+                                </button>
+                            </div>
+                        </div>
+
+                        <hr class="border-gray-300" />
+
+                        <!-- Sobre -->
+                        <div class="flex flex-col gap-3">
+                            <h2 class="text-base font-bold text-black">Sobre</h2>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                Minha trajetória na comunicação começou fora do Brasil. Enquanto cursava Direito na Universidade de Lisboa, em Portugal, descobri que meu verdadeiro interesse estava na comunicação. De volta ao Brasil, decidi mergulhar de vez nesse universo e comecei a estudar Publicidade e Propaganda.
+                            </p>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                Hoje, já tive experiências práticas que cobrem praticamente toda a jornada digital de uma marca: atuo com copywriting, UX/UI design, SEO, edição de vídeo, motion graphics, identidade visual e estratégia de conteúdo, além de ter vivido o ritmo do marketing corporativo e análise de dados. Também levo essa visão para projetos internacionais de branding e web e para a criação de conteúdo digital.
+                            </p>
+                            <p class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+                                Sigo em constante atualização, acompanhando tendências, ferramentas e comportamentos de consumo para entregar uma comunicação estratégica, criativa e orientada a resultados reais para cada cliente.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <!-- Barra inferior da janela -->
+                    <div aria-hidden="true" class="bg-[#c0c0c0] border-t-2 border-t-[#808080] h-6 w-full flex-shrink-0 mt-auto"></div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- PÁGINAS EM TELA CHEIA (imagem de fundo + barra para fechar)        -->
+    <!-- ================================================================= -->
+    <section id="page-design" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-black">
+        <img src="imagens/design.jpg" alt="" class="absolute inset-0 w-full h-full object-cover select-none" draggable="false" />
+        <header class="relative z-10 flex items-center justify-between h-9 px-2 bg-[#c0c0c0] border-b-2 border-[#404040] border-t-2 border-t-white">
+            <div class="flex items-center gap-2">
+                <button onclick="navigateTo('home')" aria-label="Voltar" class="win98-button w-7 h-6 text-xs leading-none cursor-pointer">←</button>
+                <div class="flex items-center gap-2 text-sm font-bold text-black"><img src="icons/icon-design.png" alt="" class="w-5 h-5 pixel-img" /> Design</div>
+            </div>
+            <button onclick="navigateTo('home')" aria-label="Fechar página" class="win98-button close-page-button w-7 h-6 text-xs leading-none cursor-pointer">✕</button>
+        </header>
+        <main class="relative z-10 flex-1 overflow-y-auto p-3 md:p-8 pb-16">
+            <div id="design-gallery" class="grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4" style="max-width: 100%; width: min(50%, 100%);"></div>
+        </main>
+    </section>
+
+    <section id="page-video" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-black">
+        <img src="imagens/video.jpg" alt="" class="absolute inset-0 w-full h-full object-cover select-none" draggable="false" />
+        <header class="relative z-10 flex items-center justify-between h-9 px-2 bg-[#c0c0c0] border-b-2 border-[#404040] border-t-2 border-t-white">
+            <div class="flex items-center gap-2">
+                <button onclick="navigateTo('home')" aria-label="Voltar" class="win98-button w-7 h-6 text-xs leading-none cursor-pointer">←</button>
+                <div class="flex items-center gap-2 text-sm font-bold text-black"><img src="icons/icon-video.png" alt="" class="w-5 h-5 pixel-img" /> Vídeos</div>
+            </div>
+            <button onclick="navigateTo('home')" aria-label="Fechar página" class="win98-button close-page-button w-7 h-6 text-xs leading-none cursor-pointer">✕</button>
+        </header>
+        <main class="relative z-10 flex-1 overflow-y-auto p-3 md:p-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-5xl mx-auto">
+                <div class="win98-box p-1 flex flex-col">
+                    <iframe
+                        class="w-full aspect-video"
+                        src="https://www.youtube.com/embed/0Z01mK6yzQU"
+                        title="Vídeo do portfólio"
+                        loading="lazy"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <section id="page-uiux" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-black">
+        <img src="imagens/uiux.jpg" alt="" class="absolute inset-0 w-full h-full object-cover select-none" draggable="false" />
+        <header class="relative z-10 flex items-center justify-between h-9 px-2 bg-[#c0c0c0] border-b-2 border-[#404040] border-t-2 border-t-white">
+            <div class="flex items-center gap-2">
+                <button onclick="navigateTo('home')" aria-label="Voltar" class="win98-button w-7 h-6 text-xs leading-none cursor-pointer">←</button>
+                <div class="flex items-center gap-2 text-sm font-bold text-black"><img src="icons/icon-uiux.png" alt="" class="w-5 h-5 pixel-img" /> UI/UX Design</div>
+            </div>
+            <button onclick="navigateTo('home')" aria-label="Fechar página" class="win98-button close-page-button w-7 h-6 text-xs leading-none cursor-pointer">✕</button>
+        </header>
+        <main class="relative z-10 flex-1 flex flex-col items-center justify-center gap-6 md:gap-10 p-4 pb-16">
+                <div class="flex items-start gap-8 sm:gap-10 md:gap-20">
+                    <div onclick="openIpModal()" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                        <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 drop-shadow-[0_10px_10px_rgba(0,0,0,0.7)]">
+                            <img src="directory_closed-3.png" alt="Pasta" class="w-full h-full object-contain pixel-img" draggable="false" />
+                        </div>
+                        <span class="icon-label mt-2 text-white font-bold text-xs sm:text-sm md:text-base px-2 sm:px-3 py-1 text-center">Ip Custodian</span>
+                    </div>
+                    <div onclick="openBanrisulModal()" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                        <div class="w-14 h-14 sm:w-20 sm:h-20 md:w-24 md:h-24 drop-shadow-[0_10px_10px_rgba(0,0,0,0.7)]">
+                            <img src="directory_closed-3.png" alt="Pasta" class="w-full h-full object-contain pixel-img" draggable="false" />
+                        </div>
+                        <span class="icon-label mt-2 text-white font-bold text-xs sm:text-sm md:text-base px-2 sm:px-3 py-1 text-center">Banrisul Seguros</span>
+                    </div>
+                </div>
+                <p class="script-title text-2xl sm:text-3xl md:text-5xl text-white text-center px-4">Este site também foi criado por mim</p>
+        </main>
+    </section>
+
+
+    <section id="page-fotografia" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-black">
+        <img src="imagens/video.jpg" alt="" class="absolute inset-0 w-full h-full object-cover select-none" draggable="false" />
+        <header class="relative z-10 flex items-center justify-between h-9 px-2 bg-[#c0c0c0] border-b-2 border-[#404040] border-t-2 border-t-white">
+            <div class="flex items-center gap-2">
+                <button onclick="navigateTo('home')" aria-label="Voltar" class="win98-button w-7 h-6 text-xs leading-none cursor-pointer">←</button>
+                <div class="flex items-center gap-2 text-sm font-bold text-black"><img src="icons/icon-fotografia.png" alt="" class="w-5 h-5 pixel-img" /> Fotografia</div>
+            </div>
+            <button onclick="navigateTo('home')" aria-label="Fechar página" class="win98-button close-page-button w-7 h-6 text-xs leading-none cursor-pointer">✕</button>
+        </header>
+        <main class="relative z-10 flex-1 overflow-y-auto p-3 md:p-8 pb-16 flex items-center justify-center">
+            <div class="w-full flex flex-wrap items-center justify-center gap-10 md:gap-16">
+                <button type="button" onclick="openPhotoFolder('brecho')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                    <img src="directory_closed-3.png" alt="Pasta Brechó" class="w-20 h-20 md:w-24 md:h-24 object-contain pixel-img drop-shadow-[0_6px_8px_rgba(0,0,0,0.7)]" draggable="false" />
+                    <span class="icon-label mt-2 text-white font-bold text-sm md:text-base">Brechó</span>
+                </button>
+                <button type="button" onclick="openPhotoFolder('hamburgueria')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                    <img src="directory_closed-3.png" alt="Pasta Hamburgueria" class="w-20 h-20 md:w-24 md:h-24 object-contain pixel-img drop-shadow-[0_6px_8px_rgba(0,0,0,0.7)]" draggable="false" />
+                    <span class="icon-label mt-2 text-white font-bold text-sm md:text-base">Hamburgueria</span>
+                </button>
+            </div>
+        </main>
+    </section>
+
+    <!-- MODAL: Ip Custodian -->
+    <div id="ip-modal" class="hidden fixed inset-0 z-[55] bg-black/70 flex items-center justify-center p-3 sm:p-4">
+        <div class="win98-box flex flex-col w-full max-w-xl max-h-[90vh]">
+            <div class="flex items-center justify-between h-8 px-2 bg-[#000080] flex-shrink-0">
+                <span class="text-white text-xs font-bold">Ip Custodian</span>
+                <button onclick="document.getElementById('ip-modal').classList.add('hidden')" class="win98-button w-6 h-5 text-xs leading-none cursor-pointer font-bold">✕</button>
+            </div>
+            <div class="overflow-y-auto p-4 sm:p-5 flex flex-col items-center gap-4">
+                <img src="imagens/ip-custodian.png" alt="Ip Custodian" class="w-full object-cover cursor-zoom-in" draggable="false" onclick="openLightboxSrc('imagens/ip-custodian.png','Ip Custodian')" />
+                <a href="https://myipcustodian.com/" target="_blank" class="win98-button px-5 py-1 cursor-pointer text-sm font-bold text-[#000080] underline hover:text-[#000080]">acesse aqui</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Banrisul Seguros -->
+    <div id="banrisul-modal" class="hidden fixed inset-0 z-[55] bg-black/70 flex items-center justify-center p-3 sm:p-4">
+        <div class="win98-box flex flex-col w-full max-w-4xl max-h-[90vh]">
+            <div class="flex items-center justify-between h-8 px-2 bg-[#000080] flex-shrink-0">
+                <span class="text-white text-xs font-bold">Banrisul Seguros</span>
+                <button onclick="document.getElementById('banrisul-modal').classList.add('hidden')" class="win98-button w-6 h-5 text-xs leading-none cursor-pointer font-bold">✕</button>
+            </div>
+            <div class="overflow-y-auto p-4 sm:p-5 flex flex-col gap-4">
+                <p class="text-sm font-bold text-black text-center">Página interna do Banrisul Corretora de Seguros</p>
+                <div class="flex flex-col sm:flex-row gap-4 items-start justify-center">
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <span class="text-xs font-bold text-black">Antes</span>
+                        <img src="imagens/banrisul-antes.png" alt="Antes" class="w-full object-cover cursor-zoom-in" draggable="false" onclick="openLightboxSrc('imagens/banrisul-antes.png','Antes')" />
+                    </div>
+                    <div class="flex flex-col items-center gap-1 flex-1">
+                        <span class="text-xs font-bold text-black">Depois</span>
+                        <img src="imagens/banrisul-depois.png" alt="Depois" class="w-full object-cover cursor-zoom-in" draggable="false" onclick="openLightboxSrc('imagens/banrisul-depois.png','Depois')" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: Ver mais fotos (pasta Win98) -->
+    <div id="folder-modal" class="hidden fixed inset-0 z-[50] bg-black/70 flex items-center justify-center p-4">
+        <div class="win98-box flex flex-col w-full max-w-2xl max-h-[85vh]">
+            <!-- Titlebar -->
+            <div class="flex items-center justify-between h-8 px-2 bg-[#000080]">
+                <div class="flex items-center gap-2 text-white text-xs font-bold">
+                    <svg viewBox="0 0 16 16" shape-rendering="crispEdges" class="w-4 h-4">
+                        <rect x="1" y="4" width="14" height="10" fill="#f0c040" stroke="#000" stroke-width="1"/>
+                        <rect x="1" y="3" width="5" height="2" fill="#f0c040" stroke="#000" stroke-width="1"/>
                     </svg>
+                    Ver mais
                 </div>
-                <span class="icon-label mt-2 text-white font-bold text-xs md:text-sm bg-[#000080]/90 px-3 py-1 border border-white/50 shadow text-center tracking-wide">
-                    Design & Projetos
-                </span>
+                <button onclick="closeFolderModal()" class="win98-button w-6 h-5 text-xs leading-none cursor-pointer font-bold">✕</button>
             </div>
-
+            <!-- Content -->
+            <div class="flex-1 overflow-y-auto p-4">
+                <div id="folder-modal-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+            </div>
         </div>
+    </div>
 
-    </section>
 
-    <!-- ================================================================= -->
-    <!-- CATEGORY PAGE 1: EDIÇÃO DE VÍDEO -->
-    <!-- ================================================================= -->
-    <section id="page-video" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-[#0d0f12] text-white crt-overlay pb-12">
-        <!-- Content Container -->
-        <main class="flex-1 overflow-y-auto p-4 md:p-8 z-20">
-            <div class="max-w-6xl mx-auto space-y-6">
-                
-                <div class="bg-[#161920] border border-[#2a2f3d] p-4 rounded-sm flex items-center justify-between">
-                    <div>
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <span>🎬</span> Estúdio de Edição de Vídeo
-                        </h3>
-                        <p class="text-xs text-gray-400 mt-1">Cortes, edições dinâmicas e showreels.</p>
-                    </div>
-                    <button onclick="navigateTo('home')" class="win98-button px-4 py-1.5 flex items-center space-x-2 text-xs md:text-sm font-bold cursor-pointer hover:bg-gray-300">
-                        <span>⬅️ VOLTAR</span>
-                    </button>
+
+    <!-- MODAL: Pastas de Fotografia -->
+    <div id="photo-folder-modal" class="hidden fixed inset-0 z-[52] bg-black/70 flex items-center justify-center p-4">
+        <div class="win98-box flex flex-col w-full max-w-3xl max-h-[85vh]">
+            <div class="flex items-center justify-between h-8 px-2 bg-[#000080] flex-shrink-0">
+                <div class="flex items-center gap-2 text-white text-xs font-bold">
+                    <img src="directory_closed-3.png" alt="" class="w-4 h-4 object-contain pixel-img" />
+                    <span id="photo-folder-title">Fotografia</span>
                 </div>
-
-                <!-- Video Grid Container -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="video-grid"></div>
-
+                <button onclick="closePhotoFolder()" class="win98-button w-6 h-5 text-xs leading-none cursor-pointer font-bold">✕</button>
             </div>
-        </main>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- CATEGORY PAGE 2: EDIÇÃO DE IMAGEM -->
-    <!-- ================================================================= -->
-    <section id="page-image" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-[#262626] text-white pb-12">
-        <!-- Content Container -->
-        <main class="flex-1 overflow-y-auto p-4 md:p-8">
-            <div class="max-w-6xl mx-auto space-y-6">
-                
-                <div class="bg-[#1e1e1e] border border-[#3d3d3d] p-4 rounded-sm flex items-center justify-between">
-                    <div>
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <span>🎨</span> Galeria de Edição de Imagem
-                        </h3>
-                        <p class="text-xs text-gray-400 mt-1">Tratamento fotográfico, cor e manipulacão visual.</p>
-                    </div>
-                    <button onclick="navigateTo('home')" class="win98-button px-4 py-1.5 flex items-center space-x-2 text-xs md:text-sm font-bold cursor-pointer">
-                        <span>⬅️ VOLTAR</span>
-                    </button>
-                </div>
-
-                <!-- Images Grid Container -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="image-grid"></div>
-
+            <div class="flex-1 overflow-y-auto p-4">
+                <div id="photo-folder-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
             </div>
-        </main>
-    </section>
-
-    <!-- ================================================================= -->
-    <!-- CATEGORY PAGE 3: DESIGN & PROJETOS -->
-    <!-- ================================================================= -->
-    <section id="page-design" class="page-view page-hidden absolute inset-0 z-20 flex flex-col bg-[#0a192f] text-white pb-12">
-        <!-- Content Container -->
-        <main class="flex-1 overflow-y-auto p-4 md:p-8">
-            <div class="max-w-6xl mx-auto space-y-6">
-                
-                <div class="bg-[#112240] border border-[#233554] p-4 rounded-sm flex items-center justify-between">
-                    <div>
-                        <h3 class="text-xl font-bold text-white flex items-center gap-2">
-                            <span>📄</span> Design Gráfico & Identidade Visual
-                        </h3>
-                        <p class="text-xs text-blue-200 mt-1">Branding, conceitos visuais e layouts.</p>
-                    </div>
-                    <button onclick="navigateTo('home')" class="win98-button px-4 py-1.5 flex items-center space-x-2 text-xs md:text-sm font-bold cursor-pointer">
-                        <span>⬅️ VOLTAR</span>
-                    </button>
-                </div>
-
-                <!-- Design Grid Container -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="design-grid"></div>
-
-            </div>
-        </main>
-    </section>
-
-    <!-- FIXED RETRO TASKBAR AT BOTTOM (BARRA INFERIOR COM MENINO PIXELADO) -->
-    <footer class="fixed bottom-0 left-0 right-0 z-50 h-10 bg-[#c0c0c0] border-t-2 border-white flex items-center justify-between px-2 select-none shadow-lg">
-        
-        <!-- Start Button with Pixel Art Boy Icon -->
-        <button onclick="navigateTo('home')" class="win98-button px-3 py-1 flex items-center space-x-2 text-xs font-bold cursor-pointer hover:bg-[#d0d0d0]">
-            <!-- Pixel Art Boy Icon -->
-            <svg class="w-5 h-5" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Hair (Brown) -->
-                <rect x="4" y="1" width="8" height="2" fill="#5A3825"/>
-                <rect x="3" y="2" width="10" height="2" fill="#5A3825"/>
-                <!-- Skin (Face) -->
-                <rect x="4" y="4" width="8" height="5" fill="#FFCC99"/>
-                <!-- Eyes (Pixel Black) -->
-                <rect x="5" y="5" width="2" height="2" fill="#111111"/>
-                <rect x="9" y="5" width="2" height="2" fill="#111111"/>
-                <!-- Smile -->
-                <rect x="6" y="8" width="4" height="1" fill="#D9534F"/>
-                <!-- Body / Red Shirt -->
-                <rect x="3" y="9" width="10" height="5" fill="#E53935"/>
-                <rect x="2" y="10" width="12" height="3" fill="#D32F2F"/>
-                <!-- Collar detail -->
-                <rect x="7" y="9" width="2" height="2" fill="#FFFFFF"/>
-                <!-- Border Outline pixel effect -->
-                <rect x="4" y="0" width="8" height="1" fill="#222222"/>
-                <rect x="3" y="1" width="1" height="1" fill="#222222"/>
-                <rect x="12" y="1" width="1" height="1" fill="#222222"/>
-            </svg>
-            <span class="font-bold">Iniciar</span>
-        </button>
-
-        <!-- Active Page Status Display -->
-        <div id="taskbar-status" class="win98-inset px-4 py-0.5 text-xs font-mono text-black font-bold">
-            Página: Tela Inicial
         </div>
+    </div>
 
-        <!-- Clock -->
-        <div class="win98-inset px-3 py-1 bg-[#c0c0c0] text-xs font-mono text-black">
-            <span id="live-clock">12:00</span>
-        </div>
-    </footer>
+    <!-- LIGHTBOX: imagem da galeria em tamanho maior -->
+    <div id="lightbox" class="hidden fixed inset-0 z-[60] bg-black/90 flex items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+        <button onclick="closeLightbox()" aria-label="Fechar imagem" class="win98-button absolute top-3 right-3 w-8 h-7 cursor-pointer">✕</button>
+        <img id="lightbox-img" src="" alt="" class="max-w-[95vw] max-h-[90vh] object-contain" />
+    </div>
 
-    <!-- DATA & NAVIGATION SCRIPT -->
+<!-- DATA & NAVIGATION SCRIPT -->
     <script>
-        const myData = {
-            video: [
-                {
-                    title: "Edição de Vídeo Comercial / Promo",
-                    tag: "Corte & Color Grading",
-                    desc: "Projeto com ritmo dinâmico, efeitos visuais e sincronização musical.",
-                    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                    thumb: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800"
-                },
-                {
-                    title: "Vídeo para Redes Sociais / Reels",
-                    tag: "Formatos Verticais / Motion",
-                    desc: "Edição otimizada com legendas animadas e alta retenção.",
-                    embedUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-                    thumb: "https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800"
-                }
-            ],
-            image: [
-                {
-                    title: "Retoque e Tratamento Fotográfico",
-                    tag: "Photoshop / Tratamento",
-                    desc: "Ajuste de tons, correção de cor e retoque de pele.",
-                    url: "https://images.unsplash.com/photo-1579783902614-a3fb3927b675?w=800"
-                },
-                {
-                    title: "Composição Surrealista",
-                    tag: "Arte Digital",
-                    desc: "Fusão de múltiplos elementos fotográficos criando uma atmosfera onírica.",
-                    url: "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800"
-                },
-                {
-                    title: "Edição de Cores & Moodboard",
-                    tag: "Color Grading",
-                    desc: "Harmonização de paleta e contraste em alta resolução.",
-                    url: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800"
-                }
-            ],
-            design: [
-                {
-                    title: "Identidade Visual & Branding",
-                    tag: "Brand Design",
-                    desc: "Criação de logotipo, tipografia e diretrizes de marca.",
-                    url: "https://images.unsplash.com/photo-1600132806370-bf17e65e942f?w=800"
-                },
-                {
-                    title: "Layout e Peças de Comunicação",
-                    tag: "Graphic Design",
-                    desc: "Desenvolvimento de peças publicitárias e banners digitais.",
-                    url: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800"
-                }
-            ]
+        // ===== GALERIA DA PÁGINA DESIGN =====
+        // Para adicionar uma imagem: coloque o arquivo na pasta "imagens" e acrescente uma linha aqui.
+        // (as duas abaixo são só exemplos, troque pelas suas)
+        const designImages = [
+            { src: 'imagens/design1.jpg', title: 'Cybermodel N 2°' },
+            { src: 'imagens/design2.jpg', title: 'Lakers - Kobe Bryant' },
+            { src: 'imagens/design3.jpg', title: 'New Ideas' },
+            { src: 'imagens/design4.jpg', title: 'Alexis Sanchez #7' },
+            { src: 'imagens/design5.jpg', title: 'Outubro Rosa' }
+        ];
+
+        const designImagesExtra = [
+            { src: 'imagens/design-extra-1.jpg', title: 'Civil Rights' },
+            { src: 'imagens/design-extra-2.jpg', title: 'Cowboy Bebop' },
+            { src: 'imagens/design-extra-3.jpg', title: 'Granulado HQ' },
+            { src: 'imagens/design-extra-4.jpg', title: 'Night Party' },
+            { src: 'imagens/design-extra-5.png', title: 'Nike x Jordan' }
+        ];
+
+        const statusNames = {
+            home: "Tela Inicial",
+            design: "Página: Design",
+            video: "Página: Vídeos",
+            uiux: "Página: UI/UX Design",
+            fotografia: "Página: Fotografia"
         };
 
-        function initPageData() {
-            // Render Videos
-            const videoGrid = document.getElementById('video-grid');
-            videoGrid.innerHTML = myData.video.map(v => `
-                <div class="bg-[#1c202b] border border-[#2d3345] rounded overflow-hidden shadow-lg flex flex-col">
-                    <div class="relative w-full h-56 bg-black">
-                        <iframe src="${v.embedUrl}" class="w-full h-full" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <div class="p-4 flex-1 flex flex-col justify-between">
-                        <div>
-                            <span class="text-[10px] font-mono bg-cyan-950 text-cyan-300 px-2 py-0.5 border border-cyan-800">${v.tag}</span>
-                            <h4 class="text-base font-bold text-white mt-2">${v.title}</h4>
-                            <p class="text-xs text-gray-400 mt-1">${v.desc}</p>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
+        const brechoImages = [
+            { src: 'imagens/fotografia-01.jpg', title: 'Brechó 1' },
+            { src: 'imagens/fotografia-02.jpg', title: 'Brechó 2' },
+            { src: 'imagens/fotografia-03.jpg', title: 'Brechó 3' },
+            { src: 'imagens/fotografia-04.jpg', title: 'Brechó 4' }
+        ];
 
-            // Render Images
-            const imageGrid = document.getElementById('image-grid');
-            imageGrid.innerHTML = myData.image.map(img => `
-                <div class="bg-[#1a1a1a] border border-[#383838] rounded overflow-hidden shadow-lg flex flex-col">
-                    <div class="w-full h-60 bg-black overflow-hidden">
-                        <img src="${img.url}" alt="${img.title}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-4">
-                        <span class="text-[10px] font-mono bg-amber-950 text-amber-300 px-2 py-0.5 border border-amber-800">${img.tag}</span>
-                        <h4 class="text-base font-bold text-white mt-2">${img.title}</h4>
-                        <p class="text-xs text-gray-400 mt-1">${img.desc}</p>
-                    </div>
-                </div>
-            `).join('');
+        const hamburgueriaImages = [
+            { src: 'imagens/hamburgueria-anexo.png', title: 'Hamburgueria — sanduíches' },
+            { src: 'imagens/fotografia-04.jpg', title: 'Hamburgueria 4' },
+            { src: 'imagens/fotografia-05.jpg', title: 'Hamburgueria 5' },
+            { src: 'imagens/fotografia-06.jpg', title: 'Hamburgueria 6' },
+            { src: 'imagens/fotografia-07.jpg', title: 'Hamburgueria 7' },
+            { src: 'imagens/fotografia-08.jpg', title: 'Hamburgueria 8' },
+            { src: 'imagens/fotografia-10.png', title: 'Hamburgueria 10' },
+            { src: 'imagens/fotografia-11.png', title: 'Hamburgueria 11' }
+        ];
 
-            // Render Design
-            const designGrid = document.getElementById('design-grid');
-            designGrid.innerHTML = myData.design.map(d => `
-                <div class="bg-[#112240] border border-[#1d3557] rounded overflow-hidden shadow-lg flex flex-col">
-                    <div class="w-full h-64 bg-black overflow-hidden">
-                        <img src="${d.url}" alt="${d.title}" class="w-full h-full object-cover hover:scale-105 transition duration-300">
-                    </div>
-                    <div class="p-4">
-                        <span class="text-[10px] font-mono bg-teal-950 text-teal-300 px-2 py-0.5 border border-teal-800">${d.tag}</span>
-                        <h4 class="text-base font-bold text-white mt-2">${d.title}</h4>
-                        <p class="text-xs text-blue-200 mt-1">${d.desc}</p>
-                    </div>
-                </div>
-            `).join('');
+        let activePhotoFolderImages = [];
+
+        function renderGallery() {
+            const el = document.getElementById('design-gallery');
+            el.innerHTML = designImages.map((img, i) => `
+                <button onclick="openLightbox(${i})" class="win98-box p-1 cursor-zoom-in transition hover:-translate-y-1">
+                    <img src="${img.src}" alt="${img.title}" class="block w-full aspect-square object-cover" draggable="false" />
+                </button>`).join('') + `
+                <button onclick="openFolderModal()" class="retro-icon-btn flex flex-col items-center justify-center cursor-pointer select-none bg-transparent border-0 outline-none p-2">
+                    <img src="directory_closed-3.png" alt="Pasta de projetos" class="w-16 h-16 md:w-20 md:h-20 pixel-img drop-shadow-[0_6px_8px_rgba(0,0,0,0.7)]" draggable="false" />
+                    <span class="icon-label mt-1 text-white font-bold text-xs md:text-sm px-2 py-0.5 text-center tracking-wide">Ver mais</span>
+                </button>`;
+        }
+
+        function openIpModal() {
+            document.getElementById('ip-modal').classList.remove('hidden');
+        }
+        function openBanrisulModal() {
+            document.getElementById('banrisul-modal').classList.remove('hidden');
+        }
+
+        function openFolderModal() {
+            const grid = document.getElementById('folder-modal-grid');
+            grid.innerHTML = designImagesExtra.map((img, i) => `
+                <button onclick="openLightboxExtra(${i})" class="win98-box p-1 cursor-zoom-in transition hover:-translate-y-1">
+                    <img src="${img.src}" alt="${img.title}" class="block w-full aspect-square object-cover" draggable="false" />
+                </button>`).join('');
+            document.getElementById('folder-modal').classList.remove('hidden');
+        }
+        function closeFolderModal() {
+            document.getElementById('folder-modal').classList.add('hidden');
+        }
+        function openLightboxExtra(i) {
+            const lb = document.getElementById('lightbox');
+            const im = document.getElementById('lightbox-img');
+            im.src = designImagesExtra[i].src;
+            im.alt = designImagesExtra[i].title;
+            lb.classList.remove('hidden');
+        }
+
+        function openLightboxSrc(src, alt) {
+            const lb = document.getElementById('lightbox');
+            const im = document.getElementById('lightbox-img');
+            im.src = src;
+            im.alt = alt;
+            lb.classList.remove('hidden');
+        }
+
+        function openPhotoFolder(folderName) {
+            const folders = {
+                brecho: { title: 'Brechó', images: brechoImages },
+                hamburgueria: { title: 'Hamburgueria', images: hamburgueriaImages }
+            };
+            const folder = folders[folderName];
+            if (!folder) return;
+            activePhotoFolderImages = folder.images;
+            document.getElementById('photo-folder-title').textContent = folder.title;
+            document.getElementById('photo-folder-grid').innerHTML = folder.images.map((img, i) => `
+                <button type="button" onclick="openPhotoFolderLightbox(${i})" class="win98-box p-1 cursor-zoom-in transition hover:-translate-y-1">
+                    <img src="${img.src}" alt="${img.title}" class="block w-full aspect-square object-cover" draggable="false" />
+                </button>`).join('');
+            document.getElementById('photo-folder-modal').classList.remove('hidden');
+        }
+
+        function closePhotoFolder() {
+            document.getElementById('photo-folder-modal').classList.add('hidden');
+        }
+
+        function openPhotoFolderLightbox(i) {
+            const img = activePhotoFolderImages[i];
+            if (!img) return;
+            openLightboxSrc(img.src, img.title);
+        }
+
+        function openLightbox(i) {
+            const lb = document.getElementById('lightbox');
+            const im = document.getElementById('lightbox-img');
+            im.src = designImages[i].src;
+            im.alt = designImages[i].title;
+            lb.classList.remove('hidden');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
         }
 
         function navigateTo(targetPage) {
-            const pages = ['home', 'video', 'image', 'design'];
-            
-            pages.forEach(p => {
+            if (!Object.prototype.hasOwnProperty.call(statusNames, targetPage)) return;
+            Object.keys(statusNames).forEach(p => {
                 const el = document.getElementById(`page-${p}`);
-                if (p === targetPage) {
-                    el.classList.remove('page-hidden');
-                } else {
-                    el.classList.add('page-hidden');
-                }
+                if (!el) return;
+                el.classList.toggle('page-hidden', p !== targetPage);
+                el.setAttribute('aria-hidden', p !== targetPage ? 'true' : 'false');
             });
-
-            const statusNames = {
-                home: "Tela Inicial",
-                video: "Página: Edição de Vídeo",
-                image: "Página: Edição de Imagem",
-                design: "Página: Design & Projetos"
-            };
-            document.getElementById('taskbar-status').innerText = statusNames[targetPage] || "Navegação";
+            document.title = `Pedro Delvaux — ${statusNames[targetPage]}`;
         }
 
-        setInterval(() => {
-            const d = new Date();
-            document.getElementById('live-clock').innerText = d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        }, 1000);
-
-        window.onload = initPageData;
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape') return;
+            const lb = document.getElementById('lightbox');
+            const fm = document.getElementById('folder-modal');
+            const pfm = document.getElementById('photo-folder-modal');
+            if (!lb.classList.contains('hidden')) closeLightbox();
+            else if (!pfm.classList.contains('hidden')) closePhotoFolder();
+            else if (!fm.classList.contains('hidden')) closeFolderModal();
+            else navigateTo('home');
+        });
+        renderGallery();
     </script>
 </body>
 </html>
