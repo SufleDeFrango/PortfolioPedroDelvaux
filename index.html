@@ -152,7 +152,61 @@
         }
     
         .pixel-img { image-rendering: pixelated; }
-    </style>
+    
+        /* Games modal and responsive desktop icon strip */
+        .home-icon-column { width: 150px; }
+        .games-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 90;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background: rgba(0,0,0,.78);
+        }
+        .games-modal.open { display: flex; }
+        .games-window {
+            display: flex;
+            flex-direction: column;
+            width: min(1100px, calc(100vw - 32px));
+            height: min(780px, calc(100vh - 32px));
+            min-height: 0;
+        }
+        .games-titlebar { height: 30px; min-height: 30px; }
+        .games-titlebar { display: flex; align-items: center; justify-content: space-between; }
+        .games-titlebar > div { display: flex; align-items: center; gap: 8px; min-width: 0; }
+        .games-content { flex: 1; min-height: 0; overflow: hidden; background: #10131a; }
+        .games-frame { display: block; width: 100%; height: 100%; border: 0; background: #10131a; }
+        .games-close { width: 22px; height: 20px; flex: 0 0 auto; }
+        @media (max-width: 640px) {
+            .home-icon-column {
+                width: 82px !important;
+                gap: 10px !important;
+                padding: 12px 4px 8px !important;
+                overflow-y: auto;
+                overscroll-behavior: contain;
+            }
+            .home-icon-column .retro-icon-btn > div {
+                width: 62px !important;
+                height: 62px !important;
+            }
+            .home-icon-column .icon-label {
+                max-width: 74px;
+                font-size: 9px;
+            }
+            .games-modal { padding: 6px; }
+            .games-window {
+                width: calc(100vw - 12px);
+                height: calc(100vh - 12px);
+                height: calc(100dvh - 12px);
+                max-height: none;
+            }
+            .games-titlebar { height: 34px; min-height: 34px; padding-left: 8px; padding-right: 7px; }
+            .games-close { width: 28px; height: 25px; font-size: 12px; }
+        }
+
+</style>
 </head>
 <body class="relative w-screen h-screen m-0 p-0 overflow-hidden flex flex-col justify-between">
 
@@ -170,7 +224,7 @@
         </div>
 
         <!-- ÍCONES: coluna esquerda -->
-        <div class="relative z-10 flex flex-col items-center justify-start gap-6 pt-8 pl-6 pr-3 flex-shrink-0" style="width:150px;">
+        <div class="home-icon-column relative z-10 flex flex-col items-center justify-start gap-6 pt-8 pl-6 pr-3 flex-shrink-0" style="width:150px;">
             <div onclick="navigateTo('design')" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
                 <div class="w-24 h-24 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
                     <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC0klEQVR42r2XMU7jQBSGv0QoFloUBFShQByAE7hKlRvkCjkATSQ3zDajTcMBfAU6KJBSpYoottuCggZtQURBTKxEylhCb4vExontxDFeRrKUvPG89/v9/z8eVyhhdDodOT8/5/n5Gdd1ASp51+6VUcwYg+M4xZ9Aay2A5Lm33W6H98bXpMVyjYrWWmzbptlsRrEtayQtB8BkMqHX6+1EQdVxnMpwONxUYL1baK3pdrsr8cvLSw4PD3fufhXAcZyK1pr5fI7WeiuItGIPDw+F6N8LNRCKyLbteCdSW7lezAkCuvf39Pb3AbW8PkUL4Lpuaq5qqIFlJxg0BwiCWiRJdCJwHIbDIcGa6nvtX6mOcV2Xo6OjKFen05EQ1IoLYk4QhRJBRKESqlYgAqLiildK+C2CUsJiTdxZK+5ot9uS6jqttczn82gyC0QeAOu5wvvCeDwWbUSO41SAiI4Fiz+54mr5X0keeymlsO3Buk4iu19fX2+zu1o+iQioRCeyOqC1FqUQEURrLd1uN9a5Rc4dNrwkiM8rHUBY/Pb2VpQiUTzMtYNDs0AkAYTFB4NBWcVjIFauTwoix6hF4aLFK1teUKWNpcjzvY611tJqtbi4uFiJ+76PMYYgCAiCgNfX1yg+HvsAGDPj4+OD9/d3JpMJnucxGo0yd9bqV57q4OAg+n18XC+UozCA2WxWCjWZJ6LpdEq/349a+/j4B8/zdi6wPDVRSIStVouzs7PE3NvbGwBPT08AjMc+Ly9/CQ8lAJ7nYYxhPB5zd3eXWasQBScnJwCcnp4mYqVREI56PSkuY0wkwBDEaDSLQIRd+K8itCyLWq3GdDqlXq/TaDSwrB/f5wJjTGRF3/dXqNjlbFgtw0ppNC1PQd8D4CujFABxCsKRl4YvAQiCIJOCb+lArVbLnMtrxY37wM3NDf1+f2ORTduzZVk0Go1iW3Gez7RdvkGzJv4B0zb3NUgTiMgAAAAASUVORK5CYII=" alt="Design" class="w-full h-full pixel-img" draggable="false" />
@@ -195,6 +249,12 @@
                 </div>
                 <span class="icon-label mt-1 text-white font-bold text-[10px] text-center leading-tight">Fotografia</span>
             </div>
+            <div role="button" tabindex="0" aria-label="Abrir Games" onclick="openGamesModal()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openGamesModal();}" class="retro-icon-btn flex flex-col items-center cursor-pointer select-none">
+                <div class="w-24 h-24 flex items-center justify-center drop-shadow-[0_4px_6px_rgba(0,0,0,0.7)]">
+                    <img src="icons/icon-games.png" alt="Games" class="w-full h-full object-contain pixel-img" draggable="false" />
+                </div>
+                <span class="icon-label mt-1 text-white font-bold text-[10px] text-center leading-tight">Games</span>
+            </div>
         </div>
 
         <!-- JANELA WIN98 GRANDE -->
@@ -204,7 +264,7 @@
                 <!-- Titlebar -->
                 <div class="bg-[#000080] h-7 px-2 flex items-center justify-between flex-shrink-0">
                     <div class="flex items-center gap-1.5">
-                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC0klEQVR42r2XMU7jQBSGv0QoFloUBFShQByAE7hKlRvkCjkATSQ3zDajTcMBfAU6KJBSpYoottuCggZtQURBTKxEylhCb4vExontxDFeRrKUvPG89/v9/z8eVyhhdDodOT8/5/n5Gdd1ASp51+6VUcwYg+M4xZ9Aay2A5Lm33W6H98bXpMVyjYrWWmzbptlsRrEtayQtB8BkMqHX6+1EQdVxnMpwONxUYL1baK3pdrsr8cvLSw4PD3fufhXAcZyK1pr5fI7WeiuItGIPDw+F6N8LNRCKyLbteCdSW7lezAkCuvf39Pb3AbW8PkUL4Lpuaq5qqIFlJxg0BwiCWiRJdCJwHIbDIcGa6nvtX6mOcV2Xo6OjKFen05EQ1IoLYk4QhRJBRKESqlYgAqLiildK+C2CUsJiTdxZK+5ot9uS6jqttczn82gyC0QeAOu5wvvCeDwWbUSO41SAiI4Fiz+54mr5X0keeymlsO3Buk4iu19fX2+zu1o+iQioRCeyOqC1FqUQEURrLd1uN9a5Rc4dNrwkiM8rHUBY/Pb2VpQiUTzMtYNDs0AkAYTFB4NBWcVjIFauTwoix6hF4aLFK1teUKWNpcjzvY611tJqtbi4uFiJ+76PMYYgCAiCgNfX1yg+HvsAGDPj4+OD9/d3JpMJnucxGo0yd9bqV57q4OAg+n18XC+UozCA2WxWCjWZJ6LpdEq/349a+/j4B8/zdi6wPDVRSIStVouzs7PE3NvbGwBPT08AjMc+Ly9/CQ8lAJ7nYYxhPB5zd3eXWasQBScnJwCcnp4mYqVREI56PSkuY0wkwBDEaDSLQIRd+K8itCyLWq3GdDqlXq/TaDSwrB/f5wJjTGRF3/dXqNjlbFgtw0ppNC1PQd8D4CujFABxCsKRl4YvAQiCIJOCb+lArVbLnMtrxY37wM3NDf1+f2ORTduzZVk0Go1iW3Gez7RdvkGzJv4B0zb3NUgTiMgAAAAASUVORK5CYII=" class="w-4 h-4 pixel-img" alt="" />
+                        <img src="icons/icon-portfolio-title.png" class="w-4 h-4 pixel-img" alt="" />
                         <span class="text-white text-xs font-bold">Portfólio</span>
                     </div>
                     <div class="flex gap-1">
@@ -510,7 +570,24 @@
     </div>
 
 <!-- DATA & NAVIGATION SCRIPT -->
-    <script>
+    
+    <!-- GAMES WINDOW: o jogo abre dentro desta janela e é descarregado ao fechar -->
+    <div id="games-modal" class="games-modal" role="dialog" aria-modal="true" aria-labelledby="games-window-title" aria-hidden="true">
+        <div class="win98-box games-window">
+            <div class="bg-[#000080] games-titlebar px-2 flex items-center justify-between flex-shrink-0">
+                <div class="flex items-center gap-2 min-w-0">
+                    <img src="icons/icon-games.png" alt="" class="w-5 h-5 object-contain pixel-img" draggable="false" />
+                    <span id="games-window-title" class="text-white text-xs font-bold">Games</span>
+                </div>
+                <button type="button" class="win98-button close-page-button games-close leading-none" aria-label="Fechar Games" title="Fechar" onclick="closeGamesModal()">✕</button>
+            </div>
+            <div class="games-content">
+                <iframe id="games-frame" class="games-frame" title="Office Run" allow="fullscreen" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+<script>
         // ===== GALERIA DA PÁGINA DESIGN =====
         // Para adicionar uma imagem: coloque o arquivo na pasta "imagens" e acrescente uma linha aqui.
         // (as duas abaixo são só exemplos, troque pelas suas)
@@ -739,8 +816,33 @@
             document.title = `Pedro Delvaux — ${statusNames[targetPage]}`;
         }
 
+        function openGamesModal() {
+            const modal = document.getElementById('games-modal');
+            const frame = document.getElementById('games-frame');
+            if (!modal || !frame) return;
+            modal.classList.add('open');
+            modal.setAttribute('aria-hidden', 'false');
+            // Load only while the window is open; closing stops the game loop.
+            if (!frame.getAttribute('src')) frame.setAttribute('src', 'games/office-run.html');
+            document.body.style.overflow = 'hidden';
+            const closeButton = modal.querySelector('.games-close');
+            if (closeButton) closeButton.focus({ preventScroll: true });
+        }
+
+        function closeGamesModal() {
+            const modal = document.getElementById('games-modal');
+            const frame = document.getElementById('games-frame');
+            if (!modal || !frame) return;
+            modal.classList.remove('open');
+            modal.setAttribute('aria-hidden', 'true');
+            frame.removeAttribute('src');
+            document.body.style.overflow = '';
+        }
+
         document.addEventListener('keydown', e => {
             if (e.key !== 'Escape') return;
+            const games = document.getElementById('games-modal');
+            if (games && games.classList.contains('open')) return; // Fechar Games somente pelo X.
             const lb = document.getElementById('lightbox');
             const fm = document.getElementById('folder-modal');
             const pfm = document.getElementById('photo-folder-modal');
