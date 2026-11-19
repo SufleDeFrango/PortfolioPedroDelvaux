@@ -767,7 +767,6 @@
             { src: 'imagens/fotografia-01.jpg', title: 'Brechó 1' },
             { src: 'imagens/fotografia-02.jpg', title: 'Brechó 2' },
             { src: 'imagens/fotografia-03.jpg', title: 'Brechó 3' },
-            { src: 'imagens/fotografia-04.jpg', title: 'Brechó 4' },
             { src: 'imagens/brecho-05.jpg', title: 'Brechó 5' },
             { src: 'imagens/brecho-06.jpg', title: 'Brechó 6' },
             { src: 'imagens/brecho-07.jpg', title: 'Brechó 7' }
@@ -975,8 +974,8 @@
             if (!modal || !frame) return;
             modal.classList.add('open');
             modal.setAttribute('aria-hidden', 'false');
-            // O jogo fica embutido neste HTML; não depende de uma pasta externa.
-            if (!frame.getAttribute('srcdoc')) frame.srcdoc = OFFICE_RUN_HTML;
+            // Carrega o arquivo independente do jogo para evitar falhas no srcdoc.
+            if (!frame.getAttribute('src')) frame.src = 'office-run.html';
             document.body.style.overflow = 'hidden';
             const closeButton = modal.querySelector('.games-close');
             if (closeButton) closeButton.focus({ preventScroll: true });
