@@ -26,7 +26,8 @@ button:hover{background:#f7dfa5}button:active{transform:translate(3px,3px);box-s
 .help{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;color:#a7aec0;font-size:10px;line-height:1.8}
 kbd{padding:2px 5px;border:1px solid #69748a;color:#f3e9d3}
 .mobile{display:none;gap:8px;margin-top:12px}
-.mobile button{flex:1;min-height:44px;background:#28344c;color:#fff;border-color:#65728c;touch-action:none;user-select:none;-webkit-user-select:none}
+.mobile button{flex:1;min-height:44px;background:#28344c;color:#fff;border-color:#65728c;touch-action:manipulation;user-select:none;-webkit-user-select:none}
+.mobile button.active{background:#e2ca8c;color:#171b27;border-color:#fff0bd;box-shadow:inset 0 0 0 2px #8d7446}
 @media(pointer:coarse){.mobile{display:flex}}
 @media(max-width:640px){
  body{min-height:100svh;padding:10px;display:flex;align-items:center;justify-content:center}
@@ -36,13 +37,15 @@ kbd{padding:2px 5px;border:1px solid #69748a;color:#f3e9d3}
  .stats{font-size:9px;line-height:1.5}
  .stats strong{font-size:18px}
  .stage{border-width:2px;box-shadow:0 8px 28px #0009}
- .overlay{padding:12px}
+ .overlay{padding:5px}
+ .overlay .kicker{display:none}
  .overlay:before{inset:5px;border-width:2px;box-shadow:inset 0 0 0 2px #182239,0 0 0 1px #e4d3a2}
- .overlay h2{font-size:clamp(16px,5vw,23px);margin:5px 0 2px}
- .overlay p{max-width:90%;font-size:10px;line-height:1.4;margin:4px auto 10px}
- button{padding:9px 16px;font-size:10px;border-width:2px}
+ .overlay h2{font-size:clamp(14px,4.2vw,19px);line-height:1.12;margin:2px 0}
+ .overlay p{max-width:94%;font-size:9px;line-height:1.2;margin:2px auto 5px}
+ button{padding:6px 12px;font-size:9px;border-width:2px}
  .mobile{display:flex;gap:8px;margin-top:9px}
  .mobile button{min-height:46px;padding:10px 5px;font-size:10px;letter-spacing:.05em;box-shadow:3px 3px 0 #655334}
+ .mobile button.active{transform:translate(1px,1px);box-shadow:inset 0 0 0 2px #8d7446}
  .help{display:none}
 }
 
@@ -144,7 +147,7 @@ function pixelRect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x)
 function drawComputer(o){
  const image=obstacleSprites.computer;
  if(!image||!image.complete||!image.naturalWidth)return;
- const w=40,h=36,x=Math.round(o.x),y=GROUND-h;
+ const w=46,h=41.4,x=Math.round(o.x),y=GROUND-h;
  ctx.imageSmoothingEnabled=false;
  // Original computer/desk artwork at 30% of the previous display size.
  ctx.drawImage(image,x,y,w,h);
@@ -155,6 +158,10 @@ function drawLight(o){
  const image=obstacleSprites['lamp'+color];
  if(!image||!image.complete||!image.naturalWidth)return;
  const w=69,h=23,x=Math.round(o.x),y=GROUND-78;
+ // A slim metal stem visibly connects the fixture to the office ceiling.
+ pixelRect(x+33,0,3,y+3,'#596477');
+ pixelRect(x+34,0,1,y+3,'#aab4c4');
+ pixelRect(x+29,0,11,3,'#7b879a');
  ctx.imageSmoothingEnabled=false;
  // Original hanging lamp artwork at 30% of the previous display size.
  ctx.drawImage(image,x,y,w,h);
@@ -178,7 +185,7 @@ function render(){
 function setAnimation(name){if(player.anim!==name){player.anim=name;player.frame=0;player.animClock=0;}}
 function startGame(){
  if(assetErrors.length)return;
- mode='play';score=0;speed=225;passed=0;spawnTimer=1.5;obstacles=[];distance=0;duckHeld=false;
+ mode='play';score=0;speed=225;passed=0;spawnTimer=1.5;obstacles=[];distance=0;duckHeld=false;$('duckBtn').classList.remove('active');$('duckBtn').setAttribute('aria-pressed','false');
  player={x:150,y:GROUND-CHAR_SIZE,vy:0,onGround:true,anim:'walk',frame:0,animClock:0};
  $('score').textContent='00000';$('overlay').classList.add('hidden');
  lastTime=performance.now();requestAnimationFrame(loop);
@@ -194,16 +201,15 @@ window.addEventListener('keydown',event=>{
 });
 window.addEventListener('keyup',event=>{if(event.code==='ArrowDown')setDuck(false);});
 $('jumpBtn').addEventListener('pointerdown',event=>{event.preventDefault();jump();});
-$('duckBtn').addEventListener('pointerdown',event=>{event.preventDefault();setDuck(true);});
-['pointerup','pointerleave','pointercancel'].forEach(type=>$('duckBtn').addEventListener(type,()=>setDuck(false)));
-function addObstacle(){const type=Math.random()<.56?'computer':'light';obstacles.push({type,x:W+35,w:type==='computer'?40:69,passed:false});}
+$('duckBtn').addEventListener('pointerdown',event=>{event.preventDefault();if(mode!=='play')return;setDuck(!duckHeld);$('duckBtn').classList.toggle('active',duckHeld);$('duckBtn').setAttribute('aria-pressed',String(duckHeld));});
+function addObstacle(){const type=Math.random()<.56?'computer':'light';obstacles.push({type,x:W+35,w:type==='computer'?46:69,passed:false});}
 function endGame(){
  if(mode!=='play')return;mode='over';best=Math.max(best,Math.floor(score));
  try{localStorage.setItem('officeRunBest',String(best));}catch(e){}
  $('best').textContent=String(best).padStart(5,'0');
  $('overlayTitle').textContent='Fim do expediente.';
  $('overlayText').textContent=`Você fez ${Math.floor(score)} pontos e desviou de ${passed} obstáculos.`;
- $('start').textContent='JOGAR NOVAMENTE';$('overlay').classList.remove('hidden');
+ $('start').textContent='JOGAR NOVAMENTE';$('duckBtn').classList.remove('active');$('duckBtn').setAttribute('aria-pressed','false');$('overlay').classList.remove('hidden');
 }
 function update(dt){
  const running=passed>=5;
@@ -230,14 +236,14 @@ function update(dt){
  for(const obstacle of obstacles){
   // Hitboxes are inset from transparent artwork so collisions match visible pixels.
   const ox=obstacle.x+(obstacle.type==='computer'?2:3);
-  const ow=obstacle.type==='computer'?36:63;
-  const oy=obstacle.type==='computer'?GROUND-34:GROUND-64;
-  const oh=obstacle.type==='computer'?32:16;
+  const ow=obstacle.type==='computer'?42:63;
+  const oy=obstacle.type==='computer'?GROUND-39:0;
+  const oh=obstacle.type==='computer'?37:GROUND-48;
   if(px<ox+ow&&px+pw>ox&&py<oy+oh&&py+ph>oy){endGame();break;}
  }
 }
 function loop(now){if(mode!=='play')return;const dt=Math.min((now-lastTime)/1000,.035);lastTime=now;update(dt);render();if(mode==='play')requestAnimationFrame(loop);}
-window.officeRunDiagnostics=()=>({mode,loaded:Object.keys(ANIMS).filter(name=>sprites[name].complete&&sprites[name].naturalWidth>0),failed:assetErrors.slice(),rollWidth:sprites.roll.naturalWidth,rollFrames:sprites.roll.naturalWidth/64,obstacleAssets:Object.fromEntries(Object.entries(obstacleSprites).map(([k,v])=>[k,{loaded:v.complete&&v.naturalWidth>0,width:v.naturalWidth,height:v.naturalHeight}])),playerAnimation:player.anim,playerFrame:player.frame,passed,lampColor:currentLampColor(),lampStage:Math.floor(passed/15)%4,assetsReady:assetsLoaded,obstacleDisplay:{computer:{width:40,height:36},lamp:{width:69,height:23}},collision:{computer:{width:36,height:32},lamp:{width:63,height:16}}});
+window.officeRunDiagnostics=()=>({mode,loaded:Object.keys(ANIMS).filter(name=>sprites[name].complete&&sprites[name].naturalWidth>0),failed:assetErrors.slice(),rollWidth:sprites.roll.naturalWidth,rollFrames:sprites.roll.naturalWidth/64,obstacleAssets:Object.fromEntries(Object.entries(obstacleSprites).map(([k,v])=>[k,{loaded:v.complete&&v.naturalWidth>0,width:v.naturalWidth,height:v.naturalHeight}])),playerAnimation:player.anim,playerFrame:player.frame,passed,lampColor:currentLampColor(),lampStage:Math.floor(passed/15)%4,assetsReady:assetsLoaded,obstacleDisplay:{computer:{width:46,height:41.4},lamp:{width:69,height:23}},collision:{computer:{width:42,height:37},lamp:{width:63,height:259-48}}});
 prepareBackground();render();
 })();
 </script>
