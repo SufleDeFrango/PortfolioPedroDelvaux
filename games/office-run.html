@@ -67,7 +67,7 @@ kbd{padding:2px 5px;border:1px solid #69748a;color:#f3e9d3}
  <canvas id="game" width="960" height="320" aria-label="Office Run, jogo de corrida em pixel art"></canvas>
  <div class="overlay" id="overlay">
   <div class="kicker">OFFICE RUN · PRESS START</div>
-  <h2 id="overlayTitle">Só mais uma tarefa...</h2>
+  <h2 id="overlayTitle">Me ajude a fazer entregas.</h2>
   <p id="overlayText">Pule os computadores e abaixe-se para passar sob as luminárias.</p>
   <button id="start" disabled>CARREGANDO JOGO...</button>
  </div>
@@ -115,8 +115,11 @@ for(const [name,src] of Object.entries(OBSTACLE_DATA)){
 function enableWhenReady(){
  const total=Object.keys(ANIMS).length+1+Object.keys(OBSTACLE_DATA).length;
  if(assetsLoaded+assetErrors.length===total){
-  if(assetErrors.length){$('start').textContent='ERRO AO CARREGAR';$('overlayText').textContent='Falha interna ao ler: '+assetErrors.join(', ')+'. Reabra este arquivo HTML.';}
-  else{$('start').disabled=false;$('start').textContent='COMEÇAR';$('overlayText').textContent='Pule os computadores e abaixe-se para passar sob as luminárias.';}
+  $('start').disabled=false;
+  $('start').textContent='COMEÇAR';
+  $('overlayText').textContent=assetErrors.length
+   ? 'Alguns gráficos não carregaram ('+assetErrors.join(', ')+'), mas você já pode jogar.'
+   : 'Pule os computadores e abaixe-se para passar sob as luminárias.';
  }
 }
 let mode='ready',lastTime=0,score=0,best=0;try{best=Number(localStorage.getItem('officeRunBest')||0);}catch(e){best=0;}
@@ -143,8 +146,11 @@ function drawBackground(){
 function pixelRect(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(Math.round(x),Math.round(y),w,h);}
 function drawComputer(o){
  const image=obstacleSprites.computer;
- if(!image||!image.complete||!image.naturalWidth)return;
  const w=40,h=36,x=Math.round(o.x),y=GROUND-h;
+ if(!image||!image.complete||!image.naturalWidth){
+  pixelRect(x+3,y+3,34,24,'#9aa7b8');pixelRect(x+6,y+6,28,18,'#24334d');
+  pixelRect(x+15,y+27,10,5,'#aeb8c8');pixelRect(x+8,y+32,24,4,'#68758b');return;
+ }
  ctx.imageSmoothingEnabled=false;
  // Original computer/desk artwork at 30% of the previous display size.
  ctx.drawImage(image,x,y,w,h);
@@ -153,8 +159,11 @@ function currentLampColor(){return ['Ciano','Verde','Branco','Vermelho'][Math.fl
 function drawLight(o){
  const color=['Cyan','Green','White','Red'][Math.floor(passed/15)%4];
  const image=obstacleSprites['lamp'+color];
- if(!image||!image.complete||!image.naturalWidth)return;
  const w=69,h=23,x=Math.round(o.x),y=GROUND-78;
+ if(!image||!image.complete||!image.naturalWidth){
+  pixelRect(x+30,y,8,8,'#7b879a');pixelRect(x+5,y+8,59,5,'#d6dbe3');
+  pixelRect(x+10,y+13,49,5,'#7b879a');return;
+ }
  ctx.imageSmoothingEnabled=false;
  // Original hanging lamp artwork at 30% of the previous display size.
  ctx.drawImage(image,x,y,w,h);
@@ -177,7 +186,6 @@ function render(){
 }
 function setAnimation(name){if(player.anim!==name){player.anim=name;player.frame=0;player.animClock=0;}}
 function startGame(){
- if(assetErrors.length)return;
  mode='play';score=0;speed=225;passed=0;spawnTimer=1.5;obstacles=[];distance=0;duckHeld=false;
  player={x:150,y:GROUND-CHAR_SIZE,vy:0,onGround:true,anim:'walk',frame:0,animClock:0};
  $('score').textContent='00000';$('overlay').classList.add('hidden');
@@ -241,5 +249,70 @@ window.officeRunDiagnostics=()=>({mode,loaded:Object.keys(ANIMS).filter(name=>sp
 prepareBackground();render();
 })();
 </script>
+<script>
+(() => {
+  const translations = {
+    'pt-BR': {
+      'SCORE': 'PONTUAÇÃO', 'BEST': 'RECORDE',
+      'Help me make deliveries.': 'Me ajude a fazer entregas.',
+      'Jump over computers and duck under the hanging lamps.': 'Pule os computadores e abaixe-se para passar sob as luminárias.',
+      'LOADING GAME...': 'CARREGANDO JOGO...', '↑ JUMP': '↑ PULAR', '↓ DUCK': '↓ AGACHAR',
+      'OFFICE RUN · PRESS START': 'OFFICE RUN · PRESSIONE PARA COMEÇAR',
+      'LOADING ERROR': 'ERRO AO CARREGAR', 'Internal reading error: ': 'Falha interna ao ler: ',
+      'Reopen this HTML file.': 'Reabra este arquivo HTML.', 'START': 'COMEÇAR',
+      'The workday is over.': 'Fim do expediente.', 'PLAY AGAIN': 'JOGAR NOVAMENTE',
+      'Cyan': 'Ciano', 'Green': 'Verde', 'White': 'Branco', 'Red': 'Vermelho'
+    },
+    'en-US': {
+      'PONTUAÇÃO': 'SCORE', 'RECORDE': 'BEST',
+      'Me ajude a fazer entregas.': 'Help me make deliveries.',
+      'Pule os computadores e abaixe-se para passar sob as luminárias.': 'Jump over computers and duck under the hanging lamps.',
+      'CARREGANDO JOGO...': 'LOADING GAME...', '↑ PULAR': '↑ JUMP', '↓ AGACHAR': '↓ DUCK',
+      'OFFICE RUN · PRESSIONE PARA COMEÇAR': 'OFFICE RUN · PRESS START',
+      'ERRO AO CARREGAR': 'LOADING ERROR', 'Falha interna ao ler: ': 'Internal reading error: ',
+      'Reabra este arquivo HTML.': 'Reopen this HTML file.', 'COMEÇAR': 'START',
+      'Fim do expediente.': 'The workday is over.', 'JOGAR NOVAMENTE': 'PLAY AGAIN',
+      'Ciano': 'Cyan', 'Verde': 'Green', 'Branco': 'White', 'Vermelho': 'Red'
+    }
+  };
+  let activeLanguage = 'pt-BR';
+  const originals = new WeakMap();
+  const normalize = value => String(value || '').trim().replace(/\s+/g, ' ');
+  function translate(root) {
+    const map = translations[activeLanguage] || translations['pt-BR'];
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    let node;
+    while ((node = walker.nextNode())) {
+      if (!originals.has(node)) originals.set(node, node.nodeValue);
+      const original = originals.get(node);
+      const key = normalize(original);
+      let translated = map[key];
+      if (translated === undefined && key.startsWith('Falha interna ao ler: ')) {
+        translated = activeLanguage === 'en-US' ? key.replace('Falha interna ao ler: ', 'Internal reading error: ') : key;
+      }
+      if (translated !== undefined && translated !== key) {
+        const lead = original.match(/^\s*/)?.[0] || '';
+        const trail = original.match(/\s*$/)?.[0] || '';
+        node.nodeValue = lead + translated + trail;
+      }
+    }
+    document.documentElement.lang = activeLanguage;
+    document.title = activeLanguage === 'en-US' ? 'OFFICE RUN — Pixel Runner' : 'OFFICE RUN — Corrida Pixel';
+  }
+  function setLanguage(language) {
+    if (!translations[language]) return;
+    activeLanguage = language;
+    translate(document.body);
+  }
+  window.addEventListener('message', event => {
+    if (event.source !== window.parent || event.data?.type !== 'portfolio-language') return;
+    setLanguage(event.data.language);
+  });
+  const observer = new MutationObserver(() => translate(document.body));
+  observer.observe(document.documentElement, { childList: true, subtree: true, characterData: true });
+  setLanguage('pt-BR');
+})();
+</script>
+
 </body>
 </html>
